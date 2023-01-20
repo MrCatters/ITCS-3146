@@ -28,5 +28,6 @@ int main() {
 	cin >> p2.x;
 	cout << "Enter the second y coordinate:" << endl;
 	cin >> p2.y;
-	cout << calculateDistance(&p1, &p2);
+	cout << "Total distance between the two points:" << endl;
+	cout << calculateDistance(&p1, &p2) << endl;
 }

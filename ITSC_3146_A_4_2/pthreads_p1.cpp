@@ -1,17 +1,14 @@
 /*
  @file: pthreads_skeleton.cpp
  
- @author: student name1, student2@uncc.edu
- @author: student name2, student2@uncc.edu
- @author: student name3, student3@uncc.edu
+ @author: Zachary Palko
  
  @description: A program that demonstrates processes.
  
  @course: ITSC 3146
  @assignment: in-class activity [n]
  */
-
-// Zachary Palko
+ 
 #include <pthread.h>
 #include <iostream>
 

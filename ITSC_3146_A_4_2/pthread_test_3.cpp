@@ -1,7 +1,10 @@
+// Zachary Palko
+
 #include <pthread.h>
 #include <iostream>
 
 using namespace std;
+
 
 void *PrintHello(void *arg)
 {

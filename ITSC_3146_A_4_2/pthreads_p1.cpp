@@ -11,6 +11,7 @@
  @assignment: in-class activity [n]
  */
 
+// Zachary Palko
 #include <pthread.h>
 #include <iostream>
 
@@ -37,7 +38,9 @@ void *routineName(void *arg)
 void *printMessage(void *arg)
 {
 	// Convert to int pointer and then fetch data from the address.
-	cout << my_messages[*(int *)arg] << endl;
+	string message = my_messages[*(int*)arg];
+	message.append("\n");
+	cout << message;
 	return 0;
 }
 
@@ -59,9 +62,8 @@ int main()
 
    // Create thread(s)
    // TODO: Modify according to assignment requirements
-   int my_messages_size = sizeof(my_messages) / sizeof(my_messages[0]);
-   for (int i = 0; i < my_messages_size; i++) {
-	   rc = pthread_create(&id, NULL, printMessage, &i);
+   for (int i = 0; i < 4; i++) {
+	   rc = pthread_create(&id, NULL, printMessage, new int(i));
    }
 	   
 
@@ -70,5 +72,5 @@ int main()
       return -1;
    }
    
-   pthread_exit(0);
+   pthread_exit(NULL);
 }

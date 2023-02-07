@@ -3,14 +3,23 @@
 #include <stdlib.h>
 
 int count;
+int turn = 0;
 
 void* myFunction(void* arg)
 {
+	   
    int actual_arg = *((int*) arg);
-    
-   for(unsigned int i = 0; i < 10; ++i) {
-       count++;
-       std::cout << "Thread #" << actual_arg << " count = " << count << std::endl;
+   int i = 0;
+      while (i < 10)
+      {
+		 while (turn != actual_arg)
+		 {
+			 rand();
+		 }
+         count++;
+         std::cout << "Thread #" << actual_arg << " count = " << count << std::endl;
+         i++;
+         turn = abs(actual_arg - 1);
        
     //  Random wait - This code is just to ensure that the threads
      //  show data sharing problems

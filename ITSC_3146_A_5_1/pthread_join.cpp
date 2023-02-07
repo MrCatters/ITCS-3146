@@ -1,3 +1,5 @@
+// Zachary Palko
+
 #include <iostream>
 #include <pthread.h>
 
@@ -26,6 +28,7 @@ int main()
    int rc;
    pthread_t the_thread;
    int arg = 1;   // Data being passed to the thread
+   void **retval = 0;
    
 
    // Create a new thread
@@ -35,10 +38,7 @@ int main()
    // Wait for the thread to do its job, then finish
 
    
-   // TODO: Implement a call to pthread_join to ensure
-   //       that main() waits for the thread to finish
-   //       before continuing.
-   
+   pthread_join(the_thread, retval); 
    
    
    std::cout << "Thread #" << arg << " done!" << std::endl;

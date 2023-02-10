@@ -9,8 +9,8 @@
 
 
 int count;
-pthread_mutex_t the_mutex = PTHREAD_MUTEX_INITIALIZER;   //  phread mutex variable - initialize here if using the initializer macro
-
+// Mutex used to lock threads.
+pthread_mutex_t the_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void* myFunction(void* arg)
 {
@@ -18,17 +18,12 @@ void* myFunction(void* arg)
     
 	for(unsigned int i = 0; i < 10; ++i) {
         
+        // Locks other threads from access using mutex function.
         pthread_mutex_lock(&the_mutex);
         count++;
         std::cout << "Thread #" << actual_arg << " count = " << count << std::endl;
+        // Unlocks access allowing other threads that are waiting.
         pthread_mutex_unlock(&the_mutex);
-
-        //  End of the critical region
-      
-        //  TODO:
-        //  Relinquish access to the Pthread mutex
-        //  since critical region is complete.
-
 
          //  Random wait - This code is just to ensure that the threads
          //  show data sharing problems
@@ -37,9 +32,6 @@ void* myFunction(void* arg)
          for (int x = 0; x < max; x++);
       
          // End of random wait code
-      
-      
-        
 	}
     
 	pthread_exit(NULL);
@@ -52,10 +44,7 @@ int main()
     pthread_t ids[TOTAL_THREADS];
     int args[TOTAL_THREADS];
     
-    
-    //  TODO: Initialize the pthread mutex here if using the initialization function.
-    
-    
+
     count = 0;
     for(unsigned int i = 0; i < TOTAL_THREADS; ++i) {
         args[i] = i;

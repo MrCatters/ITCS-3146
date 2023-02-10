@@ -17,22 +17,15 @@ bool interested[TOTAL_THREADS];  // Shared variable, indicates
 void enter_region(int thread_id)
 {
    int other;                       // ID of the other thread
-   
    other = thread_id - 1;           // The oposite of thread_id
+   // Sets the thread's interest state.
    interested[thread_id] = true;
    turn = other;
+   // Busy wait.
    while (turn == other && interested[other] == true);
 }
-   
-   // TODO: Add the code to indicate the
-   //       thread's interest in executing.
-   
-   
-   // TODO: Indicate the thread's turn to execute next
-   
-   
-   // TODO: Busy wait until it is the thread's turn to execute
 
+// Allows other threads to have access by setting interest pos to false.
 void leave_region(int thread_id)
 {
    interested[thread_id] = false;
@@ -44,10 +37,13 @@ void* myFunction(void* arg)
 	int thread_id = *((int*) arg);
     
 	for(unsigned int i = 0; i < 10; ++i) {
+	  // Start of critical region and region lock.
 	  enter_region(thread_id);
       count++;
       std::cout << "Thread #" << thread_id << " count = " << count << std::endl;
+      // End of critical region and region unlock.
 	  leave_region(thread_id);
+	  
       //  Random wait - This code is just to ensure that the threads
       //  show data sharing problems
       int max = rand() % 1000000;
